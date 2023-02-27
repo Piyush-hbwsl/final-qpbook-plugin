@@ -122,6 +122,7 @@ class Wp_Book_Admin {
 
 		$args = array(
 			'labels'            => $labels,
+			'menu_icon'          => 'dashicons-book',
 			'public'            => true,
 			'publicly_querable' => true,
 			'show_ui'           => true,
@@ -215,5 +216,10 @@ class Wp_Book_Admin {
 		);
 
 		register_taxonomy( 'Book Tag', array("book"), $args );
+	}
+
+	function pw_register_bookmeta_table() {
+		global $wpdb;
+		$wpdb->bookmeta = $wpdb->prefix . 'bookmeta';
 	}
 }
