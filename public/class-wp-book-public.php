@@ -204,10 +204,8 @@ class Wp_Book_Public {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 				$currency = get_option( 'book_currency' );
-
-				$get_id = get_post();
-				$book_metadata = get_metadata( 'book', $get_id->ID );
-				$currency_in_no = get_metadata( 'book', $get_id->ID, 'price', true );
+				$book_metadata = get_metadata( 'book', get_the_ID() );
+				$currency_in_no = get_metadata( 'book', get_the_ID(), 'price', true );
 
 				print_r($get_id->ID);
 				if( $book_metadata['publisher'][0] == '' || $currency_in_no == '' || $book_metadata['year'][0] == '' || $book_metadata['edition'][0] == '' || $book_metadata['url'][0] == '') {
@@ -231,28 +229,6 @@ class Wp_Book_Public {
 				$content = "<br><div>Title : ".get_the_title()."<br> Author : ".$book_metadata['author_name'][0]."<br> Price : ".
 				            $price."<br> Publisher : ".$book_metadata['publisher'][0]."<br> Year : ".$book_metadata['year'][0].
 							"<br> Edition : ".$book_metadata['edition'][0]."<br> url : ".$book_metadata['url'][0]." .</div>";
-
-				// $content .= '<div>';
-				// $content .= '<h3 style="text-align:center">' . get_the_title() . '</h3>';
-				// $content .= '<table>';
-				// $content .=	'<tbody>';
-				// $content .=	'<tr>';
-				// $content .=	'<td colspan="2"><p>Author: ' . $book_metadata['author_name'][0] . '</p></td>';
-				// $content .= "</tr>";
-				// $content .=	'<tr>';
-				// $content .=	"<td><p>Price: " . $price . "</p></td>";
-				// $content .=	"<td><p>Publisher: " . $book_metadata['publisher'][0] . "</p></td>";
-				// $content .= "</tr>";
-				// $content .=	"<tr>";
-				// $content .= "<td><p>Year: " . $book_metadata['year'][0] . "</p></td>";
-				// $content .= "<td><p>Edition: " . $book_metadata['edition'][0] . "</p></td>";
-				// $content .= "</tr>";
-				// $content .=	"<tr>";
-				// $content .= '<td colspan="2"><p style="text-align:center">For more information: <a href="'. $book_metadata['url'][0] .'" target="_blank">' . $book_metadata['url'][0] . '</p></td>';
-				// $content .= "</tr>";
-				// $content .= "</tbody>";
-				// $content .= "</table>";
-				// $content .= "</div>";
 			}
 		} else {
 			$content .= '<p style="color:red; text-align:center">No Book Found....</p>';

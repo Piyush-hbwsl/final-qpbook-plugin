@@ -122,6 +122,8 @@ class Wp_Book {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-book-public.php';
 
+		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'widgets/wp_custom_widget.php';
+
 		$this->loader = new Wp_Book_Loader();
 
 	}
@@ -184,6 +186,9 @@ class Wp_Book {
 		// action hook to include post type Book as post to show Book posts in post archive.
 		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'namespace_add_custom_types' );
 
+		// action hook to display widget on dashboard as top 5 categories of book post type based on their count
+		$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'custom_dashboard_widgets' );
+
 	}
 
 	/**
@@ -202,6 +207,9 @@ class Wp_Book {
 
 		// Create Shortcode named book to show information about book
 		add_shortcode( "book", array( $plugin_public, 'load_book_content') );
+
+		// action hook to display custom widget which shows books of selected category
+		add_action('widgets_init', 'wp_book_widget_init');
 
 	}
 
