@@ -410,5 +410,26 @@ class Wp_Book_Admin {
 		register_setting( 'book_settings_group', 'book_no_pages' );
 	}
 
+	/**
+	 * Include post type Book as post to show Book posts in post archive.
+	 *
+	 * @since    1.0.0
+	 * @param      WP_Query Object $query    Contains all information about post and stuff
+	 */
+	public function namespace_add_custom_types( $query ) {
+		if ( !is_admin() && $query->is_main_query() && is_post_type_archive( 'book' ) ) {
+            $query->set( 'posts_per_page', get_option( 'book_no_pages' ) );
+    }
 
+		// if ( ( is_category() || is_tag() ) && $query->is_archive() && empty( $query->query_vars['suppress_filters'] )&& !is_admin() ) {
+		// 	$query->set(
+		// 		'post_type',
+		// 		array(
+		// 			'Book',
+		// 		)
+		// 	);
+		// 	$query->set('posts_per_page', 2);
+		// }
+		// return $query;
+	}
 }

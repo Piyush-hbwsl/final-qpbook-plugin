@@ -182,7 +182,7 @@ class Wp_Book {
 	    $this->loader->add_action( 'admin_init', $plugin_admin, 'register_book_settings');
 
 		// action hook to include post type Book as post to show Book posts in post archive.
-		// $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'namespace_add_custom_types' );
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'namespace_add_custom_types' );
 
 	}
 
