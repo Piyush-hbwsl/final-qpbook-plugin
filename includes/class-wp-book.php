@@ -175,6 +175,15 @@ class Wp_Book {
 		// action hook to store metadata of custom metabox book
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_custom_metabox_data', 10, 2 );
 
+		// action hook for admin_menu
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'book_menu' );
+
+		// action hook to register the settings for book
+	    $this->loader->add_action( 'admin_init', $plugin_admin, 'register_book_settings');
+
+		// action hook to include post type Book as post to show Book posts in post archive.
+		// $this->loader->add_action( 'pre_get_posts', $plugin_admin, 'namespace_add_custom_types' );
+
 	}
 
 	/**
