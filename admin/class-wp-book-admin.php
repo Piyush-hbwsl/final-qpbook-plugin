@@ -44,13 +44,13 @@ class Wp_Book_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -102,7 +102,7 @@ class Wp_Book_Admin {
 
 
 
-	//Register custom post type "book"
+	// Register custom post type "book"
 	public function custom_post_type_book() {
 
 		$labels = array(
@@ -122,7 +122,7 @@ class Wp_Book_Admin {
 
 		$args = array(
 			'labels'            => $labels,
-			'menu_icon'          => 'dashicons-book',
+			'menu_icon'         => 'dashicons-book',
 			'public'            => true,
 			'publicly_querable' => true,
 			'show_ui'           => true,
@@ -176,7 +176,7 @@ class Wp_Book_Admin {
 			'show_tagcloud'     => true,
 		);
 
-		register_taxonomy( 'Book Category', array('book'), $args );
+		register_taxonomy( 'Book Category', array( 'book' ), $args );
 	}
 
 	// this function registers book tag taxonomy
@@ -215,7 +215,7 @@ class Wp_Book_Admin {
 			'show_tagcloud'     => true,
 		);
 
-		register_taxonomy( 'Book Tag', array("book"), $args );
+		register_taxonomy( 'Book Tag', array( 'book' ), $args );
 	}
 
 	// creates custom meta table
@@ -230,11 +230,11 @@ class Wp_Book_Admin {
 	}
 
 		/**
-	 * Shows custom metabox books and get values for wp_booksmeta (if any).
-	 *
-	 * @since    1.0.0
-	 * @param      object $post       Contains all information about post
-	 */
+		 * Shows custom metabox books and get values for wp_booksmeta (if any).
+		 *
+		 * @since    1.0.0
+		 * @param      object $post       Contains all information about post
+		 */
 	public function custom_books_info_function( $post ) {
 		$get_book_metadata = get_metadata( 'book', $post->ID );
 		if ( count( $get_book_metadata ) > 0 ) {
@@ -417,9 +417,9 @@ class Wp_Book_Admin {
 	 * @param      WP_Query Object $query    Contains all information about post and stuff
 	 */
 	public function namespace_add_custom_types( $query ) {
-		if ( !is_admin() && $query->is_main_query() && is_post_type_archive( 'book' ) ) {
-            $query->set( 'posts_per_page', get_option( 'book_no_pages' ) );
-        }
+		if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'book' ) ) {
+			$query->set( 'posts_per_page', get_option( 'book_no_pages' ) );
+		}
 	}
 
 	// Create a custom widget for dashboard

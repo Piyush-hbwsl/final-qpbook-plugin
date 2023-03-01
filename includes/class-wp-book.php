@@ -122,7 +122,7 @@ class Wp_Book {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-book-public.php';
 
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'widgets/wp_custom_widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'custom-widgets/custom-widgets.php';
 
 		$this->loader = new Wp_Book_Loader();
 
@@ -209,7 +209,7 @@ class Wp_Book {
 		add_shortcode( "book", array( $plugin_public, 'load_book_content') );
 
 		// action hook to display custom widget which shows books of selected category
-		add_action('widgets_init', 'wp_book_widget_init');
+		add_action('widgets_init', 'book_widget_init');
 
 	}
 
